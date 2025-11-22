@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Category } from "@/types/category";
-import { categories } from "@/data/categories";
+import { getCategories } from "@/services/categoryService";
 import TabButton from "./TabButton";
 
 interface CategoryTabsProps {
@@ -10,7 +10,24 @@ interface CategoryTabsProps {
 }
 
 export default function CategoryTabs({ onCategorySelect }: CategoryTabsProps) {
-  const [activeTab, setActiveTab] = useState<string>(categories[0].id);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [activeTab, setActiveTab] = useState<string>("");
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await getCategories();
+        setCategories(data);
+        if (data.length > 0) {
+          setActiveTab(data[0].id);
+        }
+      } catch (error) {
+        console.error("Failed to load categories:", error);
+      }
+    };
+
+    loadCategories();
+  }, []);
 
   const handleTabClick = (categoryId: string) => {
     setActiveTab(categoryId);
