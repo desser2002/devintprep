@@ -7,9 +7,10 @@ import TechnologyButton from "./TechnologyButton";
 
 interface TechnologyListProps {
   categoryId: string;
+  onTechnologySelect?: (technologyId: string) => void;
 }
 
-export default function TechnologyList({ categoryId }: TechnologyListProps) {
+export default function TechnologyList({ categoryId, onTechnologySelect }: TechnologyListProps) {
   const [technologies, setTechnologies] = useState<Technology[]>([]);
   const [selectedTech, setSelectedTech] = useState<string>("");
 
@@ -35,7 +36,9 @@ export default function TechnologyList({ categoryId }: TechnologyListProps) {
 
   const handleTechClick = (techId: string) => {
     setSelectedTech(techId);
-    console.log("Selected technology:", techId);
+    if (onTechnologySelect) {
+      onTechnologySelect(techId);
+    }
   };
 
   if (!categoryId || technologies.length === 0) {
