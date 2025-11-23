@@ -36,8 +36,8 @@ export async function getAllTechnologies(): Promise<Technology[]> {
  */
 export async function getTechnologyById(
   id: string
-): Promise<Technology | undefined> {
- //get technology by id from mock data
-
-  return mockTechnologies.find((tech) => tech.id === id);
+): Promise<Technology | null> {
+  //get technology by id from mock data
+  const tech = mockTechnologies.find((tech) => tech.id === id);
+  return tech ?? null;
 }

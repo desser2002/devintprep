@@ -20,7 +20,7 @@ export default function TechnologyButton({
       return (
         <img
           src={iconUrl}
-          alt=""
+          alt={`${label} icon`}
           className="w-5 h-5 mr-2.5"
         />
       );
