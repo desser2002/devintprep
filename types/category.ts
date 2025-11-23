@@ -3,9 +3,7 @@ export interface Category {
   label: string;
 }
 
-export interface Technology {
+export interface Language {
   id: string;
   name: string;
-  iconUrl: string;
-  categoryId: string;
 }
