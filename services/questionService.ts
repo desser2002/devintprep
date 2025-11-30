@@ -26,3 +26,20 @@ export async function getTotalQuestionCountByTechnology(
   );
   return questions.length;
 }
+
+export async function addQuestion(
+  questionData: Omit<Question, "id">
+): Promise<Question> {
+  // Generate unique ID
+  const newId = `q-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
+
+  const newQuestion: Question = {
+    id: newId,
+    ...questionData,
+  };
+
+  // Add to mock data array
+  mockQuestions.push(newQuestion);
+
+  return newQuestion;
+}
