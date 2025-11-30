@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 
 export interface SelectOption {
   id: string;
@@ -69,10 +70,12 @@ export default function CustomSelect({
           {selectedOption ? (
             <>
               {selectedOption.iconUrl && (
-                <img
+                <Image
                   src={selectedOption.iconUrl}
                   alt={selectedOption.label}
-                  className="w-5 h-5 mr-2"
+                  width={20}
+                  height={20}
+                  className="mr-2"
                 />
               )}
               <span>{selectedOption.label}</span>
@@ -114,10 +117,12 @@ export default function CustomSelect({
                 }`}
               >
                 {option.iconUrl && (
-                  <img
+                  <Image
                     src={option.iconUrl}
                     alt={option.label}
-                    className="w-5 h-5 mr-2"
+                    width={20}
+                    height={20}
+                    className="mr-2"
                   />
                 )}
                 <span className="text-gray-900">{option.label}</span>

@@ -25,7 +25,6 @@ export default function AddQuestionPage() {
     topicId: "",
   });
 
-  const [successMessage, setSuccessMessage] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   // Load technologies on component mount
@@ -100,7 +99,6 @@ export default function AddQuestionPage() {
     }
 
     setIsSubmitting(true);
-    setSuccessMessage("");
 
     try {
       await addQuestion({
@@ -109,20 +107,8 @@ export default function AddQuestionPage() {
         isCodingChallenge: formData.isCodingChallenge,
       });
 
-      setSuccessMessage("Question added successfully!");
-
-      // Reset form
-      setFormData({
-        title: "",
-        topicId: "",
-        isCodingChallenge: false,
-      });
-      setSelectedTechnologyId("");
-
-      // Redirect to home page after 1.5 seconds
-      setTimeout(() => {
-        router.push("/");
-      }, 1500);
+      // Redirect to home page immediately
+      router.push("/");
     } catch (error) {
       console.error("Error adding question:", error);
       setErrors({
@@ -145,12 +131,6 @@ export default function AddQuestionPage() {
           <h1 className="text-2xl font-bold text-gray-900 mb-6">
             Add New Question
           </h1>
-
-          {successMessage && (
-            <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
-              {successMessage}
-            </div>
-          )}
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Question Title */}
