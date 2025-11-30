@@ -18,9 +18,6 @@ export default function CategoryTabs({ onCategorySelect }: CategoryTabsProps) {
       try {
         const data = await getCategories();
         setCategories(data);
-        if (data.length > 0) {
-          setActiveTab(data[0].id);
-        }
       } catch (error) {
         console.error("Failed to load categories:", error);
       }
